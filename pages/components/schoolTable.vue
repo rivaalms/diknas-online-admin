@@ -518,6 +518,7 @@ export default {
          current: this.currentPage ? this.currentPage : 1,
          schoolTypeId: null,
          schoolType: [],
+         schoolName: null,
 
          targetItem: [],
          tab: null,
