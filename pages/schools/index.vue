@@ -57,7 +57,7 @@
                   :from="schools.from"
                   :to="schools.to"
                   :total="schools.total"
-                  @data-handler="(current, school_type_id) => dataHandler(current, school_type_id)"
+                  @data-handler="(current, school_type_id, school_name) => dataHandler(current, school_type_id, school_name)"
                />
             </v-card-text>
          </v-card>
@@ -131,11 +131,12 @@ export default {
    },
 
    methods: {
-      dataHandler(current, schoolTypeId) {
+      dataHandler(current, schoolTypeId, schoolName) {
          this.loading = true
          this.$axios.get('/school', { params: {
             page: current,
             school_type: schoolTypeId,
+            name: schoolName,
          }}).then((resp) => {
             this.schools = resp.data.data
             this.loading = false

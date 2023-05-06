@@ -30,6 +30,7 @@
                   item-text="name"
                   item-value="id"
                   label="Sekolah"
+                  placeholder="Ketik untuk mencari"
                   clearable
                   hide-details="auto"
                   class="pt-0 mt-0"
@@ -57,6 +58,7 @@
                   append-icon="mdi-magnify"
                   hide-details="auto"
                   class="pt-0 mt-0"
+                  placeholder="Enter untuk mencari"
                   @keydown.enter="dataHandler()"
                   @click:clear="emptyYearDataHandler()"
                   @click:append="dataHandler()"
@@ -555,7 +557,7 @@
             if (this.school.length > 0) return
             if (this.schoolFilterLoading) return
             this.schoolFilterLoading = true
-            this.$axios.get('/admin/searchSchoolFilter', {params: {school: val}}).then((resp) => {
+            this.$axios.get('/searchSchoolFilter').then((resp) => {
                this.school = resp.data.data
             }).catch((e) => {
                console.log(e)
@@ -565,17 +567,12 @@
          },
 
          formSchoolSync(val) {
-            // REVIEW - check for request amount in Network DevTools, if too much requests sent in a time, uncomment 'clearTimeout & setTimeout (also the timer setting and close bracket below the code)'
-            
-            // if (this.formSchool.length > 0) return
-            // clearTimeout(this._timerId)
-            // this._timerId = setTimeout(() => {
+               if (this.formSchool > 0) return
                if (this.formSchoolLoading) return
                this.formSchoolLoading = true
-               this.$axios.get('/admin/searchSchoolFilter', {params: {school: val}}).then((resp) => {
+               this.$axios.get('/searchSchoolFilter').then((resp) => {
                   this.formSchool = resp.data.data
                }).catch((e) => {console.log(e)}).finally(() => {this.formSchoolLoading = false})
-            // }, 1000)
          }
       },
       // !SECTION

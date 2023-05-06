@@ -15,6 +15,21 @@
       <div class="d-flex align-center flex-grow-1">
          <span class="me-2 text-subtitle-2">Filter: </span>
          <v-col cols="2">
+            <v-text-field
+               v-model="schoolName"
+               label="Nama sekolah"
+               clearable
+               hide-details="auto"
+               class="pt-0 mt-0"
+               :loading="loading"
+               placeholder="Enter untuk mencari"
+               append-icon="mdi-magnify"
+               @click:append="dataHandler()"
+               @click:clear="nullNamedataHandler()"
+               @keydown.enter="dataHandler()"
+            ></v-text-field>
+         </v-col>
+         <v-col cols="2">
             <v-select
                v-model="schoolTypeId"
                :items="schoolType"
@@ -631,7 +646,12 @@ export default {
 
    methods: {
       dataHandler() {
-         this.$emit('data-handler', this.current, this.schoolTypeId)
+         this.$emit('data-handler', this.current, this.schoolTypeId, this.schoolName)
+      },
+
+      nullNamedataHandler() {
+         this.schoolName = null
+         this.dataHandler()
       },
 
       async getSchoolType() {

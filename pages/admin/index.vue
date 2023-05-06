@@ -41,15 +41,16 @@
                      <v-col cols="2">
                         <v-text-field
                            v-model="searchValue"
-                           label="Cari"
-                           placeholder="Nama"
+                           label="Nama"
                            hide-details="auto"
                            class="pt-0 mt-0"
                            append-icon="mdi-magnify"
                            :loading="loading"
-                           hint="Tekan Enter untuk mencari"
+                           clearable
+                           placeholder="Enter untuk mencari"
                            @keydown.enter="dataHandler(searchValue)"
                            @click:append="dataHandler(searchValue)"
+                           @click:clear="dataHandler()"
                         ></v-text-field>
                      </v-col>
                   </div>
@@ -521,3 +522,17 @@ export default{
    }
 }
 </script>
+
+<style>
+.v-pagination__navigation {
+   transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.v-pagination__navigation, .v-pagination__item {
+   box-shadow: none!important;
+}
+
+.v-pagination__navigation:hover, .v-pagination__item:hover:not(.v-pagination__item--active) {
+   background-color: #eeeeee!important;
+}
+</style>

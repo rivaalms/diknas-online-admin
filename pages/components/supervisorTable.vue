@@ -28,11 +28,16 @@
             ></v-select> -->
             <v-text-field
                v-model="searchValue"
-               label="Cari"
-               placeholder="Nama/NIP"
+               label="Nama/NIP"
+               placeholder="Enter untuk mencari"
                hide-details="auto"
                class="pt-0 mt-0"
                :loading="loading"
+               append-icon="mdi-magnify"
+               clearable
+               @click:append="dataHandler()"
+               @keydown.enter="dataHandler()"
+               @click:clear="nullSearchDataHandler()"
             ></v-text-field>
          </v-col>
       </div>
@@ -378,8 +383,7 @@ export default {
 
    watch: {
       searchValue(val) {
-         if (this.loading === true && val.length > 0) return
-         return this.dataHandler()
+         if (val === null || val.length < 1) return this.nullSearchDataHandler()
       },
 
       changePasswordCheckbox() {
@@ -401,6 +405,11 @@ export default {
    methods: {
       dataHandler() {
          this.$emit('data-handler', this.searchValue)
+      },
+
+      nullSearchDataHandler() {
+         this.searchValue = null
+         this.dataHandler()
       },
 
       async dialog(type, item) {
