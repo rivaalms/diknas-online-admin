@@ -141,6 +141,10 @@ export default {
       }
    },
 
+   head: {
+      title: 'Dashboard'
+   },
+
    computed: {
       breadcrumb() {
          return [
@@ -177,6 +181,6 @@ export default {
             this.loading = false
          })
       },
-   }
+   },
 }
 </script>

@@ -91,6 +91,10 @@ export default {
       }
    },
 
+   head: {
+      title: 'Pengawas'
+   },
+
    computed: {
       breadcrumb() {
          return [

@@ -145,6 +145,12 @@ export default {
       }
    },
 
+   head() {
+      return {
+         title: this.category ? this.category.name : ''
+      }
+   },
+
    computed: {
       breadcrumb() {
          const data = [

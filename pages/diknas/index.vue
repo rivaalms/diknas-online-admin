@@ -88,6 +88,10 @@ export default {
       }
    },
 
+   head: {
+      title: 'Diknas'
+   },
+
    computed: {
       breadcrumb() {
          return [

@@ -170,6 +170,10 @@
             passwordAlertType: 'error',
          }
       },
+
+      head: {
+         title: 'Profil'
+      },
    
       computed: {
          ...mapState(['isAuth']),

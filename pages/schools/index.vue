@@ -110,6 +110,10 @@ export default {
       }
    },
 
+   head: {
+      title: 'Sekolah'
+   },
+
    computed: {
       breadcrumb() {
          return [

@@ -328,6 +328,12 @@ export default{
       }
    },
 
+   head() {
+      return {
+         title: 'Manajemen Admin'
+      }
+   },
+
    computed: {
       breadcrumb() {
          return [

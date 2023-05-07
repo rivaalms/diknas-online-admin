@@ -3,10 +3,10 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - diknas-online-admin',
-    title: 'diknas-online-admin',
+    titleTemplate: '%s | diknas-online-admin',
+    // title: 'diknas-online-admin',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'id',
     },
     meta: [
       { charset: 'utf-8' },
@@ -51,11 +51,11 @@ export default {
   auth: {
     strategies: {
       local: {
-        cookie: {
-          cookie: {
-            name: 'admin',
-          },
-        },
+        // cookie: {
+        //   cookie: {
+        //     name: 'admin',
+        //   },
+        // },
         endpoints: {
           login: { url: '/admin/login', method: 'post', propertyName: 'data' },
           logout: { url: '/admin/logout', method: 'post' },
@@ -103,4 +103,8 @@ export default {
   env: {
     DIKNAS_ONLINE_API_URL: 'http://diknas-online-api.test'
   },
+
+  server: {
+    port: 4000
+  }
 }
