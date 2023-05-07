@@ -104,6 +104,7 @@ export default {
     DIKNAS_ONLINE_API_URL: 'http://diknas-online-api.test'
   },
 
+  // NOTE: don't forget to delete this when stepping up to production
   server: {
     port: 4000
   }
