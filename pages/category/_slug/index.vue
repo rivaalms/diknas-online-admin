@@ -3,18 +3,7 @@
       <div class="mb-12">
          <div class="d-flex justify-space-between align-center mt-5 mb-8">
             <p class="text-h6 mb-0">{{ category.name }}</p>
-            <v-breadcrumbs
-               :items="breadcrumb"
-               class="px-0 py-2"
-            >
-               <template #item="{item}">
-                  <v-breadcrumbs-item
-                     exact
-                     :to="item.href"
-                     :disabled="item.disabled"
-                  >{{ item.text }}</v-breadcrumbs-item>
-               </template>
-            </v-breadcrumbs>
+            <app-breadcrumb/>
          </div>
          <v-row dense>
             <v-col cols="12">
@@ -91,13 +80,7 @@
 </template>
 
 <script>
-import dataTable from '@/pages/components/table'
-
 export default {
-   components: {
-      dataTable
-   },
-   
    data() {
       return {
          dataTypes: [],
@@ -151,16 +134,6 @@ export default {
       }
    },
 
-   computed: {
-      breadcrumb() {
-         const data = [
-            {text: 'Dashboard', disabled: false, href: '/'},
-            {text: `${this.category.name}` ?? '', disabled: true, href: `/category/${this.category.slug}`}
-         ]
-         return data
-      }
-   },
-
    async mounted() {
       await this.$axios.get(`/getDataTypes`, {
          params: {
@@ -186,6 +159,11 @@ export default {
       })
 
       this.dataHandler()
+
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dashboard', disabled: false, href: '/' },
+         { text: this.category.name, disabled: true, href: `/category/${this.category.slug}` }
+      ])
    },
 
    methods: {

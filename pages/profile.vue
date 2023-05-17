@@ -3,18 +3,7 @@
       <div class="mb-6">
          <div class="d-flex justify-space-between align-center mt-5 mb-8">
             <p class="text-h6 mb-0">Profil Akun</p>
-            <v-breadcrumbs
-               :items="breadcrumb"
-               class="px-0 py-2"
-            >
-               <template #item="{item}">
-                  <v-breadcrumbs-item
-                     exact
-                     :to="item.href"
-                     :disabled="item.disabled"
-                  >{{ item.text }}</v-breadcrumbs-item>
-               </template>
-            </v-breadcrumbs>
+            <app-breadcrumb/>
          </div>
 
          <v-alert
@@ -199,14 +188,6 @@
             ]
             return data
          },
-   
-         breadcrumb() {
-            const data = [
-               {text: 'Dashboard', disabled: false, href: '/'},
-               {text: 'Profil Akun', disabled: true, href: '/profile'},
-            ]
-            return data
-         }
       },
    
       watch: {
@@ -225,6 +206,13 @@
                }, 5000)
             }
          }
+      },
+
+      created() {
+         this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dashboard', disabled: false, href: '/' },
+         { text: 'Profil', disabled: true, href: '/profile' }
+      ])
       },
    
       async mounted() {

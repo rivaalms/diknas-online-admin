@@ -1,20 +1,9 @@
 <template>
 <v-container fluid>
-   <div class="mb-6">
+   <div>
       <div class="d-flex justify-space-between align-center mt-5 mb-8">
          <p class="text-h6 mb-0">Sekolah</p>
-         <v-breadcrumbs
-         :items="breadcrumb"
-         class="px-0 py-2"
-      >
-         <template #item="{item}">
-            <v-breadcrumbs-item
-               exact
-               :to="item.href"
-               :disabled="item.disabled"
-            >{{ item.text }}</v-breadcrumbs-item>
-         </template>
-      </v-breadcrumbs>
+         <app-breadcrumb/>
       </div>
    </div>
    <v-row dense>
@@ -58,6 +47,7 @@
                   :to="schools.to"
                   :total="schools.total"
                   @data-handler="(current, school_type_id, school_name) => dataHandler(current, school_type_id, school_name)"
+                  @submit="getSchoolCount"
                />
             </v-card-text>
          </v-card>
@@ -67,11 +57,7 @@
 </template>
 
 <script>
-import schoolTable from '@/pages/components/schoolTable'
-
 export default {
-   components: { schoolTable },
-
    data() {
       return {
          schoolCount: [],
@@ -104,6 +90,7 @@ export default {
             },
             {
                text: 'Aksi',
+               sortable: false,
                value: 'actions'
             }
          ]
@@ -123,15 +110,16 @@ export default {
       }
    },
 
+   created() {
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dasboard', disabled: false, href: '/' },
+         { text: 'Sekolah', disabled: true, href: '/schools' }
+      ])
+   },
+
    async mounted() {
-      await this.$axios.get(`admin/countSchoolByType`).then((resp) => {
-         this.schoolCount = resp.data.data
-      })
-      
-      await this.$axios.get(`/school`).then((resp) => {
-         this.schools = resp.data.data
-         this.loading = false
-      })
+      await this.getSchoolCount()
+      await this.getSchools()
    },
 
    methods: {
@@ -142,6 +130,19 @@ export default {
             school_type: schoolTypeId,
             name: schoolName,
          }}).then((resp) => {
+            this.schools = resp.data.data
+            this.loading = false
+         })
+      },
+
+      async getSchoolCount() {
+         await this.$axios.get(`admin/countSchoolByType`).then((resp) => {
+            this.schoolCount = resp.data.data
+         })
+      },
+
+      async getSchools() {
+         await this.$axios.get(`/school`).then((resp) => {
             this.schools = resp.data.data
             this.loading = false
          })

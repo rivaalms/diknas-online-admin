@@ -1,20 +1,9 @@
 <template>
 <v-container fluid>
-   <div class="mb-6">
+   <div>
       <div class="d-flex justify-space-between align-center mt-5 mb-8">
          <p class="text-h6 mb-0">Diknas</p>
-         <v-breadcrumbs
-         :items="breadcrumb"
-         class="px-0 py-2"
-      >
-         <template #item="{item}">
-            <v-breadcrumbs-item
-               exact
-               :to="item.href"
-               :disabled="item.disabled"
-            >{{ item.text }}</v-breadcrumbs-item>
-         </template>
-      </v-breadcrumbs>
+         <app-breadcrumb/>
       </div>
       <v-row dense>
          <v-col cols="12">
@@ -51,9 +40,7 @@
 </template>
 
 <script>
-import diknasTable from '@/pages/components/diknasTable'
 export default {
-   components: { diknasTable },
    data() {
       return {
          diknasCount: 0,
@@ -99,6 +86,13 @@ export default {
             {text: 'Diknas', disabled: true, href: '/diknas'}
          ]
       }
+   },
+
+   created() {
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dasboard', disabled: false, href: '/' },
+         { text: 'Diknas', disabled: true, href: '/diknas'}
+      ])
    },
 
    async mounted() {

@@ -1,20 +1,9 @@
 <template>
 <v-container fluid>
-   <div class="mb-6">
+   <div>
       <div class="d-flex justify-space-between align-center mt-5 mb-8">
          <p class="text-h6 mb-0">Pengawas</p>
-         <v-breadcrumbs
-         :items="breadcrumb"
-         class="px-0 py-2"
-      >
-         <template #item="{item}">
-            <v-breadcrumbs-item
-               exact
-               :to="item.href"
-               :disabled="item.disabled"
-            >{{ item.text }}</v-breadcrumbs-item>
-         </template>
-      </v-breadcrumbs>
+         <app-breadcrumb/>
       </div>
       <v-row dense>
          <v-col cols="12">
@@ -51,12 +40,7 @@
 </template>
 
 <script>
-import supervisorTable from '@/pages/components/supervisorTable'
 export default {
-   components: {
-      supervisorTable
-   },
-
    data() {
       return {
          supervisors: [],
@@ -95,13 +79,11 @@ export default {
       title: 'Pengawas'
    },
 
-   computed: {
-      breadcrumb() {
-         return [
-            {text: 'Dashboard', disabled: false, href: '/'},
-            {text: 'Pengawas', disabled: true, href: '/supervisor'}
-         ]
-      }
+   created() {
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dasboard', disabled: false, href: '/' },
+         { text: 'Pengawas', disabled: true, href: '/supervisors'}
+      ])
    },
 
    async mounted() {

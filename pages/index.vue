@@ -1,20 +1,9 @@
 <template>
 <v-container fluid>
-<div class="mb-6">
+<div>
    <div class="d-flex justify-space-between align-center mt-5 mb-8">
       <p class="text-h6 mb-0">Dashboard</p>
-      <v-breadcrumbs
-         :items="breadcrumb"
-         class="px-0 py-2"
-      >
-         <template #item="{item}">
-            <v-breadcrumbs-item
-               exact
-               :to="item.href"
-               :disabled="item.disabled"
-            >{{ item.text }}</v-breadcrumbs-item>
-         </template>
-      </v-breadcrumbs>
+      <app-breadcrumb/>
    </div>
    <v-row dense>
       <v-col cols="12" md="4">
@@ -22,7 +11,7 @@
             <v-card-title class="text-subtitle-1">
                Jumlah Sekolah
             </v-card-title>
-            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-4">
+            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-3">
                {{ totalSchool }}
                <div class="d-flex justify-end">
                   <v-btn text color="primary" to="/schools" exact>
@@ -37,7 +26,7 @@
             <v-card-title class="text-subtitle-1">
                Jumlah Pengawas
             </v-card-title>
-            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-4">
+            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-3">
                {{ totalSupervisor }}
                <div class="d-flex justify-end">
                   <v-btn text color="primary" to="/supervisors" exact>
@@ -69,7 +58,6 @@
             </v-card-title>
             <v-card-text>
                <data-table
-                  :headers="tableHeaders"
                   :items="data.data"
                   :total-page="data.last_page"
                   :current-page="data.current_page"
@@ -88,52 +76,11 @@
 </template>
 
 <script>
-import dataTable from '@/pages/components/table'
-
 export default {
-   components: { dataTable },
-
    data() {
       return {
          data: [],
          loading: true,
-         tableHeaders: [
-            {
-               text: 'ID',
-               value: 'id'
-            },
-            {
-               text: 'Sekolah',
-               value: 'school.name'
-            },
-            {
-               text: 'Tipe data',
-               value: 'data_type.name'
-            },
-            {
-               text: 'Kategori',
-               sortable: false,
-               value: 'data_type.data_category.name'
-            },
-            {
-               text: 'Tahun ajaran',
-               value: 'year'
-            },
-            {
-               text: 'Status',
-               sortable: false,
-               value: 'data_status.name'
-            },
-            {
-               text: 'Terakhir diperbarui',
-               value: 'date'
-            },
-            {
-               text: 'Aksi',
-               sortable: false,
-               value: 'actions'
-            }
-         ],
 
          totalSchool: 0,
          totalSupervisor: 0,
@@ -145,14 +92,12 @@ export default {
       title: 'Dashboard'
    },
 
-   computed: {
-      breadcrumb() {
-         return [
-            {text: 'Dashboard', disabled: true, href: '/'},
-         ]
-      }
+   created() {
+      this.$store.dispatch('setBreadcrumb', [
+         { text: 'Dasboard', disabled: true, href: '/' }
+      ])
    },
-
+   
    async mounted() {
       await this.$axios.get(`/getData`).then((resp) => {
          this.data = resp.data.data
