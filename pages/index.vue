@@ -99,10 +99,7 @@ export default {
    },
    
    async mounted() {
-      await this.$axios.get(`/getData`).then((resp) => {
-         this.data = resp.data.data
-         this.loading = false
-      })
+      await this.dataHandler()
 
       await this.$axios.get(`/admin/countUsers`).then((resp) => {
          this.totalSchool = resp.data.data.total_school
