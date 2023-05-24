@@ -252,7 +252,7 @@ export default {
                   })
                })
             } else if (type === 'school-new') {
-               await this.$axios.post('/admin/createSchool', this.targetItem).then((resp) => {
+               await this.$axios.post('/school/create', this.targetItem).then((resp) => {
                   this.$store.dispatch('setAlert', {
                      color: 'green darken-2',
                      icon: 'mdi-check-circle',

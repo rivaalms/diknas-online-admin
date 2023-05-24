@@ -46,7 +46,7 @@
                   :from="schools.from"
                   :to="schools.to"
                   :total="schools.total"
-                  @data-handler="(current, school_type_id, school_name) => dataHandler(current, school_type_id, school_name)"
+                  @data-handler="(current, school_type_id, school_name, year) => dataHandler(current, school_type_id, school_name, year)"
                   @submit="getSchoolCount"
                />
             </v-card-text>
@@ -63,6 +63,7 @@ export default {
          schoolCount: [],
          schools: [],
          loading: true,
+         currentYear: (new Date().getMonth() < 5) ? ((new Date().getFullYear()-1) + '-' + new Date().getFullYear()) : (new Date().getFullYear() + '-' + (new Date().getFullYear()+1)),
          tableHeaders: [
             {
                text: 'ID',
@@ -119,16 +120,17 @@ export default {
 
    async mounted() {
       await this.getSchoolCount()
-      await this.getSchools()
+      await this.dataHandler()
    },
 
    methods: {
-      dataHandler(current, schoolTypeId, schoolName) {
+      dataHandler(current, schoolTypeId, schoolName, year) {
          this.loading = true
          this.$axios.get('/school', { params: {
             page: current,
             school_type: schoolTypeId,
             name: schoolName,
+            year: year ?? this.currentYear,
          }}).then((resp) => {
             this.schools = resp.data.data
             this.loading = false
@@ -136,17 +138,10 @@ export default {
       },
 
       async getSchoolCount() {
-         await this.$axios.get(`admin/countSchoolByType`).then((resp) => {
+         await this.$axios.get(`/countSchool`).then((resp) => {
             this.schoolCount = resp.data.data
          })
       },
-
-      async getSchools() {
-         await this.$axios.get(`/school`).then((resp) => {
-            this.schools = resp.data.data
-            this.loading = false
-         })
-      }
    }
 }
 </script>

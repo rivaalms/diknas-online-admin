@@ -271,7 +271,11 @@ export default {
       },
 
       async getRevisionData(id) {
-         await this.$axios.get(`/school/getRevisionData/${id}`).then((resp) => {
+         await this.$axios.get(`/getRevision`, {
+            params: {
+               id
+            }
+         }).then((resp) => {
             this.revisions = resp.data.data
          })
       },
