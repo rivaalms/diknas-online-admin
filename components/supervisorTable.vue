@@ -2,10 +2,10 @@
    <div>
       <app-alert/>
 
-      <div class="d-flex justify-space-between align-center">
-         <div class="d-flex align-center flex-grow-1">
+      <div class="d-flex flex-column-reverse flex-md-row justify-md-space-between align-center">
+         <div class="d-flex flex-column flex-md-row align-self-stretch align-md-center flex-grow-1">
             <span class="me-2 text-subtitle-2">Filter: </span>
-            <v-col cols="3">
+            <v-col cols="12" md="3">
                <v-text-field
                   v-model="searchValue"
                   label="Nama/NIP"
@@ -24,6 +24,7 @@
          <v-btn
             depressed
             color="primary"
+            class="align-self-end align-self-md-baseline"
             @click.stop="dialog('supervisor-new')"
          >Input Pengawas</v-btn>
       </div>
@@ -70,7 +71,7 @@
             </v-tooltip>
          </template>
       </v-data-table>
-      <div v-if="items" class="d-flex justify-space-between align-center">
+      <div v-if="items" class="d-flex flex-column flex-md-row justify-space-between align-center">
          <p class="text-caption mb-0">
             {{ from }}-{{ to }} dari {{ total }} data
          </p>

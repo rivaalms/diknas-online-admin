@@ -1,9 +1,21 @@
 <template>
 <v-navigation-drawer
+   v-model="drawer"
    clipped
    app
 >
    <v-list dense nav>
+      <v-list-item
+         v-if="isMobile"
+      >
+         <v-list-item-title class="text-subtitle-1">diknas-online-admin</v-list-item-title>
+         <v-list-item-action>
+            <v-btn icon @click.stop="drawer = !drawer">
+               <v-icon>mdi-menu</v-icon>
+            </v-btn>
+         </v-list-item-action>
+      </v-list-item>
+      
       <v-list-item-group active-class="primary--text">
          <template v-for="(item, i) in routes">
             <template v-if="item.child">
@@ -54,6 +66,13 @@
 
 <script>
 export default {
+   props: {
+      sidebar: {
+         type: Boolean,
+         default: false
+      }
+   },
+   
    data() {
       return {
          routes: [
@@ -102,31 +121,56 @@ export default {
             }
          ],
          categories: [],
-         submenuIcon: 'mdi-chevron-down'
+         submenuIcon: 'mdi-chevron-down',
+         drawer: false,
+         isMobile: false,
+      }
+   },
+
+   watch: {
+      sidebar() {
+         if (this.sidebar === true) {
+            this.drawer = this.sidebar
+         }
+      },
+
+      drawer() {
+         this.checkIsMobile()
+
+         if (this.drawer === false || window.innerWidth >= 960) {
+            this.$emit('toggle-sidebar')
+         }
       }
    },
 
    mounted() {
       this.fetchCategories()
+      this.checkIsMobile()
    },
 
    methods: {
       async fetchCategories() {
          await this.$axios.get('/getCategories').then((response) => {
-         const categories = []
-         response.data.data.forEach(function(item) {
-            categories.push({
-               title: item.name,
-               to: '/category/' + item.slug
+            const categories = []
+            response.data.data.forEach(function(item) {
+               categories.push({
+                  title: item.name,
+                  to: '/category/' + item.slug
+               })
+            })
+
+            this.routes.forEach(function(item) {
+               if (item.title === "Kategori") {
+                  item.child = categories
+               }
             })
          })
+      },
 
-         this.routes.forEach(function(item) {
-            if (item.title === "Kategori") {
-               item.child = categories
-            }
-         })
-         })
+      checkIsMobile() {
+         if (window.innerWidth >= 960) {
+            this.isMobile = false
+         } else this.isMobile = true
       }
    }
 }

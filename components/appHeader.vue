@@ -7,7 +7,8 @@
    clipped-left
    class="app-bar"
 >
-   <v-toolbar-title class="text-h6">{{ project_name }}</v-toolbar-title>
+   <v-app-bar-nav-icon class="d-block d-md-none" @click.stop="$emit('toggle-sidebar')"></v-app-bar-nav-icon>
+   <v-toolbar-title class="d-none d-md-block text-h6">{{ project_name }}</v-toolbar-title>
 
    <v-spacer/>
 

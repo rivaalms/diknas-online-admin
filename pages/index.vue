@@ -1,10 +1,9 @@
 <template>
 <v-container fluid>
 <div>
-   <div class="d-flex justify-space-between align-center mt-5 mb-8">
-      <p class="text-h6 mb-0">Dashboard</p>
-      <app-breadcrumb/>
-   </div>
+   <page-header
+      title="Dashboard"
+   />
    <v-row dense>
       <v-col cols="12" md="4">
          <v-card flat>
@@ -94,7 +93,7 @@ export default {
 
    created() {
       this.$store.dispatch('setBreadcrumb', [
-         { text: 'Dasboard', disabled: true, href: '/' }
+         { text: 'Dashboard', disabled: true, href: '/' }
       ])
    },
    

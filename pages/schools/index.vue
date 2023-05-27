@@ -1,36 +1,25 @@
 <template>
 <v-container fluid>
    <div>
-      <div class="d-flex justify-space-between align-center mt-5 mb-8">
-         <p class="text-h6 mb-0">Sekolah</p>
-         <app-breadcrumb/>
-      </div>
+      <page-header
+         title="Sekolah"
+      />
    </div>
    <v-row dense>
-      <v-col cols="12" md="4">
+      <v-col
+         v-for="(item, key) in schoolCount"
+         :key="key"
+         :cols="(key === 'total') ? 12 : 6"
+         md="4"
+      >
          <v-card flat>
-            <v-card-title class="text-subtitle-1">
-               Jumlah Sekolah
+            <v-card-title class="text-subtitle-1" :class="key !== 'total' ? 'text-uppercase' : ''">
+               {{ (key === 'total') ? 'Jumlah Sekolah' : key }}
             </v-card-title>
-            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-4">{{ schoolCount.total }}</v-card-text>
+            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-3">{{ item }}</v-card-text>
          </v-card>
       </v-col>
-      <v-col cols="12" md="4">
-         <v-card flat>
-            <v-card-title class="text-subtitle-1">
-               Jumlah SMP
-            </v-card-title>
-            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-4">{{ schoolCount.smp }}</v-card-text>
-         </v-card>
-      </v-col>
-      <v-col cols="12" md="4">
-         <v-card flat>
-            <v-card-title class="text-subtitle-1">
-               Jumlah SD
-            </v-card-title>
-            <v-card-text class="text-h4 font-weight-medium grey--text text--darken-4">{{ schoolCount.sd }}</v-card-text>
-         </v-card>
-      </v-col>
+      
       <v-col cols="12">
          <v-card flat>
             <v-card-title class="text-subtitle-1">
@@ -113,7 +102,7 @@ export default {
 
    created() {
       this.$store.dispatch('setBreadcrumb', [
-         { text: 'Dasboard', disabled: false, href: '/' },
+         { text: 'Dashboard', disabled: false, href: '/' },
          { text: 'Sekolah', disabled: true, href: '/schools' }
       ])
    },

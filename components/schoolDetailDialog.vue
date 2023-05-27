@@ -3,6 +3,7 @@
    <v-tabs
       v-model="tab"
       grow
+      mobile-breakpoint="960"
    >
       <v-tab>Informasi sekolah</v-tab>
       <v-tab>Data Siswa</v-tab>
@@ -14,7 +15,7 @@
    >
       <v-tab-item class="px-1 py-4">
          <v-row dense>
-            <v-col align-self="stretch">
+            <v-col cols="12" sm="3" align-self="stretch">
                <v-card flat outlined height="100%">
                   <v-card-text>
                      <p class="font-weight-bold mb-0">Nama Sekolah</p>
@@ -22,7 +23,7 @@
                   </v-card-text>
                </v-card>
             </v-col>
-            <v-col>
+            <v-col cols="12" sm="3" align-self="stretch">
                <v-card flat outlined height="100%">
                   <v-card-text>
                      <p class="font-weight-bold mb-0">Email</p>
@@ -30,7 +31,7 @@
                   </v-card-text>
                </v-card>
             </v-col>
-            <v-col>
+            <v-col cols="12" sm="3" align-self="stretch">
                <v-card flat outlined height="100%">
                   <v-card-text>
                      <p class="font-weight-bold mb-0">Kepala Sekolah</p>
@@ -38,7 +39,7 @@
                   </v-card-text>
                </v-card>
             </v-col>
-            <v-col>
+            <v-col cols="12" sm="3" align-self="stretch">
                <v-card flat outlined height="100%">
                   <v-card-text>
                      <p class="font-weight-bold mb-0">Pengawas</p>
@@ -63,7 +64,7 @@
                <v-card flat outlined>
                   <v-card-text>
                      <p class="mb-2">Jumlah Siswa</p>
-                     <p class="text-h4 font-weight-medium grey--text text--darken-2">{{ targetItem.total_students }}</p>
+                     <p class="text-h4 font-weight-medium grey--text text--darken-3">{{ targetItem.total_students }}</p>
                   </v-card-text>
                </v-card>
             </v-col>
@@ -71,7 +72,7 @@
                <v-card flat outlined>
                   <v-card-text>
                      <p class="mb-2">Kelas {{ students.grade }}</p>
-                     <p class="text-h4 font-weight-medium grey--text text--darken-2">{{ students.total }}</p>
+                     <p class="text-h4 font-weight-medium grey--text text--darken-3">{{ students.total }}</p>
                   </v-card-text>
                </v-card>
             </v-col>
@@ -97,7 +98,7 @@
                <v-card flat outlined>
                   <v-card-text>
                      <p class="mb-2">Jumlah Guru</p>
-                     <p class="text-h4 font-weight-medium grey--text text--darken-2">{{ targetItem.total_teachers }}</p>
+                     <p class="text-h4 font-weight-medium grey--text text--darken-3">{{ targetItem.total_teachers }}</p>
                   </v-card-text>
                </v-card>
             </v-col>
@@ -107,7 +108,7 @@
                <template
                   v-if="key !== 'updated_at' && key !== 'created_at' && key !== 'school_id' && key !== 'year' && key !== 'id'"
                >
-                  <v-col :key="key" cols="3" align-self="stretch">
+                  <v-col :key="key" cols="12" sm="3" align-self="stretch">
                      <v-card flat outlined height="100%">
                         <v-card-text>
                            <p class="mb-2">
@@ -129,7 +130,7 @@
                               : (key === 'entrepreneurship') ? 'Kewirausahaan'
                               : 'Total' }}
                            </p>
-                           <p class="text-h4 font-weight-medium grey--text text--darken-2">{{ item }}</p>
+                           <p class="text-h4 font-weight-medium grey--text text--darken-3">{{ item }}</p>
                         </v-card-text>
                      </v-card>
                   </v-col>
@@ -160,3 +161,9 @@ export default {
    }
 }
 </script>
+
+<style>
+.v-slide-group__prev {
+   display: none!important;
+}
+</style>

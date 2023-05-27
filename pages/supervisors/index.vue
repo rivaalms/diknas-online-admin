@@ -1,17 +1,16 @@
 <template>
 <v-container fluid>
    <div>
-      <div class="d-flex justify-space-between align-center mt-5 mb-8">
-         <p class="text-h6 mb-0">Pengawas</p>
-         <app-breadcrumb/>
-      </div>
+      <page-header
+         title="Pengawas"
+      />
       <v-row dense>
          <v-col cols="12">
             <v-card flat>
                <v-card-title class="text-subtitle-1">
                   Jumlah Pengawas
                </v-card-title>
-               <v-card-text class="text-h4 font-weight-medium grey--text text--darken-4">{{ countSupervisor }}</v-card-text>
+               <v-card-text class="text-h4 font-weight-medium grey--text text--darken-3">{{ countSupervisor }}</v-card-text>
             </v-card>
          </v-col>
          <v-col cols="12">
@@ -81,7 +80,7 @@ export default {
 
    created() {
       this.$store.dispatch('setBreadcrumb', [
-         { text: 'Dasboard', disabled: false, href: '/' },
+         { text: 'Dashboard', disabled: false, href: '/' },
          { text: 'Pengawas', disabled: true, href: '/supervisors'}
       ])
    },

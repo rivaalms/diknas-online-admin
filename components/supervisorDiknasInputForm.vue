@@ -39,7 +39,7 @@
             <template
                v-if="changePasswordCheckbox"
             >
-               <v-col cols="4">
+               <v-col cols="12" md="4">
                   <v-text-field
                      v-model="targetItem.old_password"
                      label="Kata sandi lama"
@@ -50,7 +50,7 @@
                      @click:append="toggleOldPasswordVisibility()"
                   ></v-text-field>
                </v-col>
-               <v-col cols="4">
+               <v-col cols="12" md="4">
                   <v-text-field
                      v-model="targetItem.password"
                      label="Kata sandi baru"
@@ -61,7 +61,7 @@
                      @click:append="togglePasswordVisibility()"
                   ></v-text-field>
                </v-col>
-               <v-col cols="4">
+               <v-col cols="12" md="4">
                   <v-text-field
                      v-model="confirmPassword"
                      label="Konfirmasi kata sandi"
@@ -77,7 +77,7 @@
          <template
             v-else
          >
-            <v-col cols="6">
+            <v-col cols="12" md="6">
                <v-text-field
                   v-model="targetItem.password"
                   label="Kata sandi"
@@ -88,7 +88,7 @@
                   @click:append="togglePasswordVisibility()"
                ></v-text-field>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="12" md="6">
                <v-text-field
                   v-model="confirmPassword"
                   label="Konfirmasi kata sandi"

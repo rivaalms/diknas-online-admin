@@ -1,10 +1,10 @@
 <template>
    <v-container fluid>
-      <div class="mb-12">
-         <div class="d-flex justify-space-between align-center mt-5 mb-8">
-            <p class="text-h6 mb-0">{{ category.name }}</p>
-            <app-breadcrumb/>
-         </div>
+      <div>
+         <page-header
+            :title="category.name"
+         />
+         
          <v-row dense>
             <v-col cols="12">
                <v-card flat>
@@ -36,11 +36,11 @@
                      <v-row dense>
                         <v-col
                            v-for="item in dataTypes" :key="item.id"
-                           cols="12"
+                           cols="6"
                            sm="4"
                            md="2"
                         >
-                           <v-card flat outlined class="v-btn text-capitalize" router :to="{name: 'category-slug-type', params: { slug: category.slug, type: item.slug }}" exact>
+                           <v-card flat outlined height="100%" class="v-btn text-capitalize" router :to="{name: 'category-slug-type', params: { slug: category.slug, type: item.slug }}" exact>
                               <v-card-text>
                                  {{ item.name }}
                               </v-card-text>
@@ -60,11 +60,11 @@
                      <v-row dense>
                         <v-col
                            v-for="item in categories" :key="item.id"
-                           cols="12"
+                           cols="6"
                            sm="4"
                            md="2"
                         >
-                           <v-card flat outlined class="v-btn text-capitalize" router :to="{name: 'category-slug', params: {slug: item.slug}}" exact>
+                           <v-card flat outlined height="100%" class="v-btn text-capitalize" router :to="{name: 'category-slug', params: {slug: item.slug}}" exact>
                               <v-card-text>
                                  {{ item.name }}
                               </v-card-text>
