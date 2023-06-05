@@ -67,10 +67,12 @@ export default {
    methods: {
       ...mapMutations(['SET_IS_AUTH']),
 
-      async logout() {
-         await this.$auth.logout()
-         this.SET_IS_AUTH(false)
-         this.$router.push('/login')
+      logout() {
+         this.$store.dispatch('setDialog', {
+            type: 'logout',
+            title: 'Keluar?',
+         })
+         this.$store.dispatch('showDialog')
       },
    }
 }

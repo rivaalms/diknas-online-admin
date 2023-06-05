@@ -6,7 +6,7 @@
 >
    <v-card>
       <v-card-title class="justify-space-between">
-         <span class="text-subtitle-1">{{ dialog ? dialog.title : '' }}</span>
+         <span class="text-subtitle-1 font-weight-medium">{{ dialog ? dialog.title : '' }}</span>
          <v-tooltip left color="black">
             <template #activator="{on, attrs}">
                <v-btn
@@ -74,6 +74,11 @@
          @submit="submit()"
       />
       <!-- //!SECTION -->
+
+      <lazy-logout-dialog
+         v-if="dialog && dialog.type === 'logout'"
+         @close="closeDialog()"
+      />
       
    </v-card>
 </v-dialog>
@@ -121,6 +126,7 @@ export default {
                case 'supervisor-delete':
                case 'diknas-delete':
                case 'admin-delete':
+               case 'logout':
                   this.dialogWidth = 500
                   break
                default: break
