@@ -4,7 +4,6 @@
    :color="alert.color"
    :icon="alert.icon"
    dismissible
-   text
    transition="fade-transition"
    :value="alertTrigger"
    >

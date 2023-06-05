@@ -8,6 +8,7 @@
                </div>
                <v-card flat color="transparent">
                   <v-card-text>
+                     <app-alert/>
                      <v-form ref="form" @submit.prevent="onSubmit">
                
                         <v-text-field
@@ -22,7 +23,7 @@
                            v-model="password"
                            dark
                            :rules="rules"
-                           label="Password"
+                           label="Kata Sandi"
                            type="password"
                            required
                         ></v-text-field>
@@ -88,7 +89,19 @@ export default {
             }).then((resp) => {
                this.SET_IS_AUTH(true)
                this.$router.push('/')
-            }).catch((error) => { return error })
+            }).catch((e) => {
+               let message = ''
+               if (this.email.includes('@')) {
+                  message = 'Email atau kata sandi tidak sesuai dengan kredensial yang tersimpan.'
+               } else {
+                  message = 'Email tidak valid.'
+               }
+               this.$store.dispatch('setAlert', {
+                  type: 'error',
+                  message,
+               })
+               this.$store.dispatch('showAlert')
+            })
          }
       },
 

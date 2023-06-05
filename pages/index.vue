@@ -92,6 +92,7 @@ export default {
    },
 
    created() {
+      this.$store.dispatch('clearAlert')
       this.$store.dispatch('setBreadcrumb', [
          { text: 'Dashboard', disabled: true, href: '/' }
       ])
