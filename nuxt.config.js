@@ -49,6 +49,12 @@ export default {
   ],
 
   auth: {
+    cookie: {
+      prefix: 'auth.admin.'
+    },
+    localStorage: {
+      prefix: 'auth.admin.'
+    },
     strategies: {
       local: {
         // cookie: {
