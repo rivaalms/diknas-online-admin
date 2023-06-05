@@ -85,6 +85,7 @@
                      hint="Jika kosong, tetap menggunakan file lama"
                      persistent-hint
                      truncate-length="30"
+                     :rules="formFileRules"
                   ></v-file-input>
                </v-col>
                <v-col cols="12" md="6">
@@ -199,7 +200,7 @@ export default {
                formData.append('_method', 'PUT')
             }
 
-            await this.$axios.post( `/admin/data/${this.targetItem.id}/update`, formData).then((resp) => {
+            await this.$axios.post( `/data/update/${this.targetItem.id}`, formData).then((resp) => {
                this.$store.dispatch('setAlert', {
                   type: 'info',
                   icon: 'mdi-information-outline',
@@ -209,7 +210,7 @@ export default {
                this.$store.dispatch('setAlert', {
                   type: 'error',
                   icon: 'mdi-information-outline',
-                  message: e
+                  message: e.response.data.message
                })
             }).finally(() => {
                this.$emit('submit')
