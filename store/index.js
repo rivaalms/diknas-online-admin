@@ -57,11 +57,11 @@ export const state = () => ({
    dialog: null,
    dialogTrigger: false,
 
-   breadcrumb: {
+   breadcrumb: [{
       text: null,
       disabled: false,
       href: null,
-   }
+   }]
 })
 
 export const mutations = {
